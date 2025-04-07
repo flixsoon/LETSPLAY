@@ -31,14 +31,14 @@ class BasePage extends StatelessWidget {
         MaterialPageRoute(builder: (context) => JouerPage()),
       );
     } else if (index == 2) {
-      // Navigate to ReserverPage with placeholder values
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) => ReserverPage(
-            fieldTitle: 'Default Title', // Placeholder title
-            fieldLocation: 'Default Location', // Placeholder location
-            fieldPrice: 'Default Price', // Placeholder price
+            fieldTitle: 'Select a Field',
+            fieldLocation: '',
+            fieldPrice: '',
+            fieldId: '',
           ),
         ),
       );

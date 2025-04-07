@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'BasePage.dart';
-import 'main.dart'; // Import main.dart to access HomePage
+import 'TeamCompletionPage.dart';
 
 class JouerPage extends StatelessWidget {
   const JouerPage({Key? key}) : super(key: key);
@@ -8,190 +8,134 @@ class JouerPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BasePage(
-      title: 'Mes Reservations',
+      title: 'Jouer',
       currentIndex: 1, // Set the appropriate index for the footer navigation
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Header Section
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                ElevatedButton.icon(
-                  onPressed: () {
-                    // Navigate to the main.dart page (HomePage)
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            HomePage(), // Navigate to HomePage
-                      ),
-                    );
-                  },
-                  icon: const Icon(Icons.add),
-                  label: const Text('Create Game'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.green,
-                    foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Comment voulez-vous jouer?',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
                 ),
-                Row(
-                  children: [
-                    IconButton(
-                      onPressed: () {
-                        // Add filter logic
-                      },
-                      icon: const Icon(Icons.filter_list),
-                      color: Colors.grey.shade700,
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        // Add sort logic
-                      },
-                      icon: const Icon(Icons.sort),
-                      color: Colors.grey.shade700,
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            const SizedBox(height: 16),
-            // Game Cards Section
-            Expanded(
-              child: ListView.builder(
-                itemCount: 2, // Replace with dynamic data count
-                itemBuilder: (context, index) {
-                  return Card(
-                    margin: const EdgeInsets.only(bottom: 16),
-                    elevation: 4,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: const [
-                                  Text(
-                                    '8 a side . Regular',
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      color: Colors.grey,
-                                    ),
-                                  ),
-                                  SizedBox(height: 8),
-                                  Text(
-                                    '4/8 En Cours',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const Icon(Icons.group,
-                                  size: 40, color: Colors.green),
-                            ],
-                          ),
-                          const SizedBox(height: 16),
-                          const Text(
-                            'PLAY NOW',
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.grey,
-                            ),
-                          ),
-                          const SizedBox(height: 4),
-                          const Text(
-                            'Tomorrow, 12:30 AM',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(height: 16),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: const [
-                                  Icon(Icons.location_on,
-                                      size: 16, color: Colors.grey),
-                                  SizedBox(width: 4),
-                                  Text(
-                                    'Terrain Bettana',
-                                    style: TextStyle(fontSize: 14),
-                                  ),
-                                ],
-                              ),
-                              const Text(
-                                '~1.87 kms',
-                                style:
-                                    TextStyle(fontSize: 14, color: Colors.grey),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 16),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              ElevatedButton.icon(
-                                onPressed: () {
-                                  // Add logic for skill level
-                                },
-                                label: const Text('Intermédiaire'),
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.black87,
-                                  foregroundColor: Colors.white,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                ),
-                              ),
-                              ElevatedButton(
-                                onPressed: () {
-                                  // Show a SnackBar when the "Join" button is pressed
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: const Text(
-                                        'Votre demande sera examinée par le créateur de l\'équipe.',
-                                      ),
-                                      duration: const Duration(seconds: 3),
-                                      behavior: SnackBarBehavior.floating,
-                                      backgroundColor: Colors.green,
-                                    ),
-                                  );
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.green,
-                                  foregroundColor: Colors.white,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                ),
-                                child: const Text('Join'),
-                              ),
-                            ],
-                          ),
-                        ],
+              ),
+              const SizedBox(height: 24),
+              _buildOptionCard(
+                context,
+                title: 'Complétion d\'équipe & Discussion entre joueurs',
+                description: 'Trouvez des équipes qui cherchent des joueurs ou créez votre propre équipe',
+                icon: Icons.group,
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const TeamCompletionPage(
+                        fieldId: '',
+                        fieldTitle: '',
                       ),
                     ),
                   );
                 },
               ),
-            ),
-          ],
+              const SizedBox(height: 16),
+              _buildOptionCard(
+                context,
+                title: 'Organisation de Matchs',
+                description: 'Créez un match et invitez d\'autres équipes à jouer',
+                icon: Icons.sports_soccer,
+                onTap: () {
+                  // Handle match organization
+                },
+              ),
+              const SizedBox(height: 16),
+              _buildOptionCard(
+                context,
+                title: 'Tournois Locaux',
+                description: 'Participez ou organisez des tournois dans votre région',
+                icon: Icons.emoji_events,
+                onTap: () {
+                  // Handle local tournaments
+                },
+              ),
+              const SizedBox(height: 16),
+              _buildOptionCard(
+                context,
+                title: 'Entraînement & Cours',
+                description: 'Trouvez des entraîneurs ou des cours pour améliorer vos compétences',
+                icon: Icons.fitness_center,
+                onTap: () {
+                  // Handle training & courses
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildOptionCard(
+    BuildContext context, {
+    required String title,
+    required String description,
+    required IconData icon,
+    required VoidCallback onTap,
+  }) {
+    return Card(
+      elevation: 4,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(12),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF0B2133).withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Icon(
+                  icon,
+                  size: 36,
+                  color: const Color(0xFF0B2133),
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      description,
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.grey.shade600,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const Icon(Icons.arrow_forward_ios, size: 16),
+            ],
+          ),
         ),
       ),
     );

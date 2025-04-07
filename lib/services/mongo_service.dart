@@ -3,15 +3,26 @@ import 'package:mongo_dart/mongo_dart.dart';
 class MongoService {
   static Db? _db;
   static bool _isConnected = false;
+  
+  // MongoDB connection configuration
+  static const String _defaultConnectionString = 'mongodb://localhost:27017/letsplay';
+  static String _connectionString = _defaultConnectionString;
+
+  // Getter for the database instance
+  static Db? get db => _db;
+
+  // Set the connection string
+  static void setConnectionString(String connectionString) {
+    _connectionString = connectionString;
+  }
 
   // Initialize the connection
   static Future<void> connect() async {
     try {
-      _db = Db(
-          'mongodb://localhost:27017'); // Replace with your connection string
+      _db = Db(_connectionString);
       await _db!.open();
       _isConnected = true;
-      print('MongoDB connected successfully.');
+      print('MongoDB connected successfully to $_connectionString');
     } catch (e) {
       _isConnected = false;
       print('Failed to connect to MongoDB: $e');
